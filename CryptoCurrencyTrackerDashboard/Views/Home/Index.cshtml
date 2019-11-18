@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Crypto Currency Exchange Tracker";
+}
+
+
+
+<div class="container">
+    <br />
+    <div style="width:90%; margin:0 auto;">
+        <table id="rates" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>APIName</th>
+                    <th>ExchangeName</th>
+                    <th>Price</th>
+                    <th>RateTime</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script>
+
+
+        $(document).ready(function ()
+        {
+            $("#rates").DataTable({
+                "processing": true, 
+                "serverSide": true, 
+                "ajax": {
+                    "url": "/Home/LoadData",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "api.name", "autoWidth": true },
+                    { "data": "currency.name","autoWidth": true },
+                    { "data": "price","name":"Price","autoWidth": true },
+                    { "data": "rateTime","autoWidth": true },
+                ]
+
+            });
+        });
+
+</script> 
